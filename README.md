@@ -1,1378 +1,278 @@
-# 🔐 KRYPT CLI
-
-### OSINT • RECON • DISCOVER • ASSESS
-
-> **KRYPT CLI** is a terminal-only cybersecurity intelligence and authorized web-security assessment framework built for security researchers, penetration testers, students, and authorized testing environments.
-[![Tests](https://img.shields.io/badge/Tests-37%20Passing-brightgreen.svg)](#testing)
-[![Security](https://img.shields.io/badge/Security-Authorized%20Testing-red.svg)](#-responsible-use)
----
-
 # KRYPT CLI
 
-```text
+```
 ██╗  ██╗██████╗ ██╗   ██╗██████╗ ████████╗
 ██║ ██╔╝██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝
-█████╔╝ ██████╔╝ ╚████╔╝ ██████╔╝   ██║
-██╔═██╗ ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║
-██║  ██╗██║  ██║   ██║   ██║        ██║
-╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝
+█████╔╝ ██████╔╝ ╚████╔╝ ██████╔╝   ██║   
+██╔═██╗ ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║   
+██║  ██╗██║  ██║   ██║   ██║        ██║   
+╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝   
+
+             KRYPT CLI
+   OSINT • RECON • DISCOVER • ASSESS
 ```
 
-# 🔐 KRYPT CLI
-
-### OSINT • RECON • DISCOVER • ASSESS
-
-**Terminal-First Cybersecurity Intelligence & Authorized Web Security Assessment Framework**
-
-[![Version](https://img.shields.io/badge/version-0.1.0-00D9FF?style=for-the-badge)](#)
-[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=for-the-badge\&logo=python\&logoColor=white)](#)
-[![Interface](https://img.shields.io/badge/Interface-Terminal-111111?style=for-the-badge\&logo=gnubash\&logoColor=white)](#)
-[![Security](https://img.shields.io/badge/Security-Fail--Closed-22C55E?style=for-the-badge)](#security-model)
-[![Tests](https://img.shields.io/badge/Tests-37%20Passing-22C55E?style=for-the-badge)](#testing)
-[![License](https://img.shields.io/badge/License-MIT-2563EB?style=for-the-badge)](LICENSE)
+**Author:** Gaddam Manyu ([@manoharmanyu](https://github.com/manoharmanyu))  
+**Version:** `0.1.0`  
+**License:** MIT  
 
 ---
 
-## ⚡ Executive Summary
+## Overview
 
-**KRYPT CLI** is a terminal-only cybersecurity framework created by **Gaddam Manyu (@manoharmanyu)** for authorized security research, reconnaissance, OSINT collection, controlled vulnerability assessment, evidence management, and professional reporting.
+**KRYPT CLI** is a **100% terminal-driven cybersecurity intelligence and authorized web-security assessment framework**.
 
-KRYPT combines:
+Designed strictly for command-line efficiency:
+* **NO** web dashboards
+* **NO** graphical desktop windows
+* **NO** external browser dependencies
+* Everything is executed and visualized directly in your terminal via `krypt <command> [options]`.
 
-* OSINT intelligence
-* Domain reconnaissance
-* DNS intelligence
-* Subdomain discovery
-* Web crawling
-* JavaScript analysis
-* Endpoint discovery
-* Technology fingerprinting
-* Security-header analysis
-* Controlled vulnerability detection
-* Evidence collection
-* Technical SEO auditing
-* Application hardening validation
-* Cryptographic code-integrity verification
-* Multi-format reporting
-
-Everything is controlled through a single CLI:
-
-```bash
-krypt <command> [options]
-```
-
-**No dashboard.
-No website.
-No desktop GUI.
-No browser interface.**
-
-KRYPT is intentionally designed around a terminal-first workflow.
+KRYPT combines multi-source OSINT intelligence gathering, high-speed scoped web crawling, deep JavaScript static route extraction, defensive security header analysis, and controlled, fail-closed vulnerability assessment modules into a unified, modular architecture.
 
 ---
 
-# 🎯 Why KRYPT?
+## Core Capabilities & Features
 
-Modern security workflows often require operators to switch between multiple disconnected tools for:
-
-```text
-OSINT
-   ↓
-DNS
-   ↓
-Recon
-   ↓
-Crawler
-   ↓
-Endpoints
-   ↓
-Technology Detection
-   ↓
-Security Analysis
-   ↓
-Evidence
-   ↓
-Findings
-   ↓
-Reports
-```
-
-KRYPT brings these workflows together under one controlled command-line architecture.
-
----
-
-# 🧠 Core Design Principles
-
-```text
-┌──────────────────────┐
-│   FAIL-CLOSED        │
-│   SCOPE ENFORCEMENT  │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   RECON & OSINT      │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   DISCOVERY          │
-│   CRAWL / ENDPOINTS  │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ CONTROLLED SECURITY  │
-│     ASSESSMENT       │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│ EVIDENCE & FINDINGS  │
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│     REPORTING        │
-└──────────────────────┘
-```
-
-### Core principles
-
-**Scope First**
-
-Every active request must be validated against the registered target scope.
-
-**Fail Closed**
-
-If scope validation fails, the request is blocked.
-
-**Evidence First**
-
-Security findings must be backed by observable evidence.
-
-**Terminal First**
-
-All functionality is accessible through the CLI.
-
-**Authorized Testing**
-
-Active testing is restricted to systems the operator is authorized to assess.
+1. **Hard Target Scope Enforcement (Fail-Closed Safety):**
+   * Pre-execution scope boundary validation prevents any active security probes from reaching unauthorized targets.
+   * Scopes are registered explicitly via `krypt target add <target>`.
+2. **Modular OSINT Intelligence Engine:**
+   * Multi-source aggregation across DNS records (A, AAAA, MX, NS, TXT, CNAME, SOA), Certificate Transparency logs (`crt.sh`), passive subdomain enumeration, email indicator harvesting, and RDAP public records.
+3. **Deep Web Reconnaissance & Fingerprinting:**
+   * Automated identification of web servers (Nginx, Apache, IIS, Caddy), backend frameworks (Express, PHP, Laravel, Django, Flask, FastAPI), frontend libraries (React, Next.js, Vue), CMS (WordPress, Drupal), and CDN/WAF indicators (Cloudflare, CloudFront, Fastly).
+4. **Controlled BFS Web Crawler (Photon & TorBot Inspired):**
+   * Asynchronous, depth-bounded, rate-limited crawling discovering links, forms, parameters, scripts, and endpoints.
+5. **Static JavaScript Inspection:**
+   * Scans client-side JS bundles for internal API endpoints, route patterns, parameter definitions, and public configuration strings.
+6. **Defensive Security Assessment Modules:**
+   * **SQLi:** Defensive SQL injection detection using controlled syntax boundary probes and boolean differential analysis without destructive payload execution.
+   * **XSS:** Reflected XSS analysis using harmless canary tokens and contextual output encoding verification.
+   * **Auth:** Session cookie flags audit (`HttpOnly`, `Secure`, `SameSite`), token predictability, and rate-limiting indicators.
+   * **Authz:** Broken access control and administrative route boundary tests (`/admin`, `/admin/dashboard`, `/admin/users`).
+   * **IDOR:** Insecure Direct Object Reference testing across object identifier parameters using controlled test identities.
+   * **Exposure:** Detection of leaked environment files (`.env`), Git repositories (`.git/HEAD`), backups, and debug endpoints (`/debug/vars`, `/actuator`).
+   * **Headers:** Security headers grading (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy).
+7. **Evidence-First Verification & Secret Redaction:**
+   * Every security conclusion stores verifiable, redacted HTTP request/response proofs. Sensitive tokens, passwords, and authorization headers are automatically masked.
+8. **Interactive Terminal Visualization:**
+   * Renders tree graphs of target architecture, subdomains, endpoints, and finding severities directly inside the terminal (`krypt graph`).
+9. **Multi-Format Reporting Engine:**
+   * Generates reports in **Terminal (Rich table/cards)**, **JSON**, **HTML (dark-themed standalone)**, **Markdown**, **CSV**, and **PDF**.
+10. **Built-in Intentionally Vulnerable Laboratory:**
+    * Native Python/Docker laboratory environment with isolated test endpoints for testing and validating all assessment modules (`krypt lab start|stop|status|verify`).
 
 ---
 
-# 🛡️ Security Model
+## Architecture
 
-KRYPT implements a hard authorization boundary.
-
-Before active testing:
-
-```bash
-krypt target add <target>
 ```
-
-Execution pipeline:
-
-```text
-TARGET
-   │
-   ▼
-REGISTERED?
-   │
-   ▼
-HOSTNAME ALLOWED?
-   │
-   ▼
-RESOLVED IP ALLOWED?
-   │
-   ▼
-DESTINATION ALLOWED?
-   │
-   ▼
-EXECUTE
-```
-
-If any validation fails:
-
-```text
-╭────────────────────────────────╮
-│        REQUEST BLOCKED          │
-│                                │
-│ Target is outside registered   │
-│ authorization scope.           │
-╰────────────────────────────────╯
-```
-
-KRYPT never silently continues outside scope.
-
----
-
-# 🔎 OSINT Intelligence Engine
-
-```bash
-krypt osint example.com
-```
-
-The OSINT engine uses modular source adapters.
-
-```text
-Source
-   ↓
-Collector
-   ↓
-Normalizer
-   ↓
-Deduplicator
-   ↓
-Evidence Store
-   ↓
-Intelligence Report
-```
-
-Supported intelligence categories:
-
-| Category    | Information              |
-| ----------- | ------------------------ |
-| Domain      | Domain information       |
-| Subdomain   | Discovered hosts         |
-| Host        | Hostname intelligence    |
-| IP          | Resolved addresses       |
-| Email       | Public email indicators  |
-| URL         | Discovered URLs          |
-| DNS         | DNS records              |
-| Certificate | Certificate intelligence |
-| Technology  | Technology fingerprints  |
-| Metadata    | Public metadata          |
-
----
-
-# 🌐 DNS Intelligence
-
-```bash
-krypt dns example.com
-```
-
-Supported records:
-
-```text
-A
-AAAA
-MX
-NS
-TXT
-CNAME
-SOA
+                               ┌─────────────────────────────┐
+                               │          KRYPT CLI          │
+                               │      (Typer / Rich UI)      │
+                               └──────────────┬──────────────┘
+                                              │
+              ┌───────────────────────────────┼───────────────────────────────┐
+              │                               │                               │
+              ▼                               ▼                               ▼
+   ┌────────────────────┐          ┌────────────────────┐          ┌────────────────────┐
+   │    OSINT Engine    │          │    Recon Engine    │          │  Security Modules  │
+   │  DNS / Cert / Mail │          │ Crawler / JS / Tech│          │ SQLi, XSS, Auth,   │
+   └──────────┬─────────┘          └──────────┬─────────┘          │ IDOR, Exposure     │
+              │                               │                    └──────────┬─────────┘
+              │                               │                               │
+              └───────────────────────────────┼───────────────────────────────┘
+                                              ▼
+                               ┌─────────────────────────────┐
+                               │   Fail-Closed Scope Engine  │
+                               │   (Authorization Boundary)  │
+                               └──────────────┬──────────────┘
+                                              ▼
+                               ┌─────────────────────────────┐
+                               │        Evidence Store       │
+                               │   & SQLite DB (~/.krypt/)   │
+                               └──────────────┬──────────────┘
+                                              ▼
+                               ┌─────────────────────────────┐
+                               │      Reporting Engine       │
+                               │ (Terminal, JSON, HTML, PDF) │
+                               └─────────────────────────────┘
 ```
 
 ---
-
-# 🌎 Subdomain Discovery
-
-```bash
-krypt subdomains example.com
-```
-
-Example:
-
-```text
-example.com
-├── www.example.com
-├── api.example.com
-├── dev.example.com
-└── mail.example.com
-```
-
-Results contain:
-
-```text
-Hostname
-Source
-First Seen
-Last Seen
-Resolved IP
-Status
-```
-
----
-
-# 📧 Email Intelligence
-
-```bash
-krypt emails example.com
-```
-
-KRYPT collects publicly available email indicators through supported sources.
-
-Credentials are never verified or harvested.
-
----
-
-# 🔬 Web Reconnaissance
-
-```bash
-krypt recon https://authorized.example
-```
-
-Reconnaissance includes:
-
-```text
-HTTP Status
-HTTPS
-Redirects
-TLS Information
-HTTP Headers
-Server Information
-robots.txt
-sitemap.xml
-Page Metadata
-Technology Detection
-```
-
----
-
-# 🧠 Technology Fingerprinting
-
-```bash
-krypt tech https://authorized.example
-```
-
-KRYPT can identify technologies such as:
-
-```text
-Nginx
-Apache
-IIS
-Node.js
-Express
-PHP
-Laravel
-Django
-Flask
-React
-Next.js
-WordPress
-Drupal
-CDN / WAF indicators
-```
-
-Example:
-
-```text
-╭──────────────── Technology Detection ────────────────╮
-│ Technology     Confidence     Evidence               │
-├──────────────────────────────────────────────────────┤
-│ Nginx          HIGH            Server Header          │
-│ React          MEDIUM          Script Fingerprint     │
-│ Next.js        HIGH            Framework Marker       │
-│ Cloudflare     HIGH            Response Headers       │
-╰──────────────────────────────────────────────────────╯
-```
-
----
-
-# 🕷️ Controlled Web Crawler
-
-```bash
-krypt crawl https://authorized.example
-```
-
-Options:
-
-```bash
---depth
---max-pages
---rate
---threads
---timeout
---same-origin
---json
-```
-
-The crawler discovers:
-
-```text
-Links
-Forms
-Parameters
-Scripts
-APIs
-Endpoints
-Redirects
-robots.txt
-sitemap.xml
-```
-
-Crawler pipeline:
-
-```text
-URL
- │
- ▼
-Scope Check
- │
- ▼
-HTTP Client
- │
- ▼
-Parser
- │
- ├── Links
- ├── Forms
- ├── Scripts
- ├── Parameters
- └── Endpoints
- │
- ▼
-Deduplication
- │
- ▼
-Evidence Store
-```
-
----
-
-# 📜 JavaScript Analysis
-
-```bash
-krypt scripts https://authorized.example
-```
-
-Analyzes JavaScript for:
-
-```text
-Endpoint References
-API Paths
-URL Patterns
-Parameter Names
-Public Configuration
-Non-secret Environment Indicators
-```
-
-Sensitive information is redacted.
-
----
-
-# 🔗 Endpoint Discovery
-
-```bash
-krypt endpoints https://authorized.example
-```
-
-Example:
-
-```text
-GET     /api/users
-POST    /api/login
-GET     /api/products?id=
-GET     /api/profile
-POST    /api/orders
-```
-
-Endpoint records contain:
-
-```text
-Method
-URL
-Parameters
-Content Type
-Discovery Source
-Confidence
-```
-
----
-
-# 🛡️ Security Header Engine
-
-```bash
-krypt headers https://authorized.example
-```
-
-Analyzes:
-
-```text
-Content-Security-Policy
-Strict-Transport-Security
-X-Frame-Options
-X-Content-Type-Options
-Referrer-Policy
-Permissions-Policy
-```
-
-Cookie controls:
-
-```text
-Secure
-HttpOnly
-SameSite
-```
-
----
-
-# 🔥 Controlled Vulnerability Assessment
-
-Run the complete assessment:
-
-```bash
-krypt scan <target> --all
-```
-
-Available modules:
-
-```text
-sqli
-xss
-auth
-authz
-idor
-exposure
-headers
-```
-
-Individual module:
-
-```bash
-krypt scan <target> --module sqli
-krypt scan <target> --module xss
-krypt scan <target> --module auth
-krypt scan <target> --module authz
-krypt scan <target> --module idor
-krypt scan <target> --module exposure
-```
-
----
-
-# 💉 SQL Injection Detection
-
-KRYPT performs controlled SQL injection detection.
-
-```text
-Candidate Parameter
-        │
-        ▼
-Controlled Validation
-        │
-        ▼
-Response Comparison
-        │
-        ▼
-Error / Behavior Analysis
-        │
-        ▼
-Confidence
-        │
-        ▼
-Evidence
-        │
-        ▼
-Finding
-```
-
-KRYPT does not implement:
-
-```text
-Database dumping
-Destructive SQL
-Arbitrary record modification
-Credential extraction
-```
-
----
-
-# 🧪 XSS Detection
-
-```bash
-krypt scan <target> --module xss
-```
-
-Detects:
-
-```text
-Reflected XSS
-Potential Stored XSS
-Reflection Points
-Context
-Encoding Behavior
-```
-
-Validation uses harmless markers.
-
----
-
-# 🔐 Authentication Analysis
-
-KRYPT can analyze authorized applications for:
-
-```text
-Session weaknesses
-Cookie security
-Authentication-state inconsistencies
-Reset-flow weaknesses
-Missing rate limiting
-```
-
-Laboratory identities can be used for controlled testing.
-
----
-
-# 🚪 Authorization / IDOR
-
-Example laboratory workflow:
-
-```text
-USER_TEST
-   │
-   ├── Own Resource
-   │      └── EXPECTED: ALLOWED
-   │
-   └── Other Test User
-          └── EXPECTED: DENIED
-```
-
-Unexpected access can generate:
-
-```text
-[HIGH] BROKEN ACCESS CONTROL / IDOR
-```
-
-Administrative endpoints are evaluated as authorization boundaries.
-
----
-
-# 📊 Findings Engine
-
-List findings:
-
-```bash
-krypt findings
-```
-
-Show finding:
-
-```bash
-krypt findings show <id>
-```
-
-Filter:
-
-```bash
-krypt findings --severity critical
-```
-
-Target filter:
-
-```bash
-krypt findings --target <target>
-```
-
-Finding model:
-
-```text
-ID
-Target
-Module
-Vulnerability
-Severity
-Confidence
-Endpoint
-Parameter
-Evidence
-Impact
-Remediation
-References
-Timestamp
-```
-
-Severity:
-
-```text
-CRITICAL
-HIGH
-MEDIUM
-LOW
-INFO
-```
-
----
-
-# 🧾 Evidence Library
-
-KRYPT follows an evidence-first architecture.
-
-Evidence may contain:
-
-```text
-Request Metadata
-Response Metadata
-Relevant Headers
-Status Code
-Timing Observations
-Discovery Source
-Crawler Source
-```
-
-Sensitive values are redacted:
-
-```text
-Passwords
-API Keys
-Bearer Tokens
-Cookies
-Session IDs
-Authorization Headers
-```
-
----
-
-# 🚀 Technical SEO Engine
-
-KRYPT also provides a technical SEO audit engine.
-
-```bash
-krypt seo https://authorized.example
-```
-
-The engine checks:
-
-```text
-Title Tag
-Meta Description
-Canonical URL
-Viewport
-Robots Meta
-OpenGraph
-Twitter Cards
-H1
-H2
-Schema.org / JSON-LD
-Image Alt Text
-robots.txt
-sitemap.xml
-```
-
-Example:
-
-```text
-╭──────────────────── SEO Technical Audit ────────────────────╮
-│ Target:          http://127.0.0.1:8888                    │
-│ SEO Score:       100%                                      │
-│ Grade:           A+                                        │
-│ Canonical:       http://127.0.0.1:8888/                  │
-│ Sitemap:         DETECTED                                  │
-│ Structured Data: YES                                       │
-╰────────────────────────────────────────────────────────────╯
-```
-
----
-
-# 🧱 Hardened Laboratory
-
-KRYPT provides isolated vulnerable and hardened environments.
-
-Start hardened mode:
-
-```bash
-krypt lab start --mode hardened
-```
-
-The laboratory supports validation of:
-
-```text
-SQL Injection
-XSS
-IDOR
-Broken Access Control
-Authentication
-Insecure Cookies
-Security Headers
-Information Exposure
-```
-
-Hardened protections include:
-
-```text
-Parameterized SQL Queries
-Context-Aware Escaping
-Content Security Policy
-Role-Based Access Control
-Password Hashing
-Constant-Time Verification
-Rate Limiting
-Secure Cookies
-Security Headers
-Sensitive Path Protection
-```
-
----
-
-# 🔐 Cryptographic Integrity Engine
-
-KRYPT includes a source-code integrity subsystem.
-
-Verify:
-
-```bash
-krypt integrity
-```
-
-Generate baseline:
-
-```bash
-krypt integrity --generate
-```
-
-Integrity pipeline:
-
-```text
-Python Source Files
-        │
-        ▼
-SHA-256 Digests
-        │
-        ▼
-File Signatures
-        │
-        ▼
-Master Verification Hash
-        │
-        ▼
-Tamper Detection
-```
-
-Detects:
-
-```text
-Modified Files
-Missing Modules
-Unexpected Files
-Injected Scripts
-```
-
----
-
-# 🩺 KRYPT Doctor
-
-Run complete diagnostics:
-
-```bash
-krypt doctor
-```
-
-Checks:
-
-```text
-Python
-Dependencies
-SQLite
-Docker
-Configuration
-Network
-Permissions
-Laboratory
-Code Integrity
-```
-
----
-
-# 🎯 Target Management
-
-Add:
-
-```bash
-krypt target add https://authorized.example
-```
-
-List:
-
-```bash
-krypt target list
-```
-
-Information:
-
-```bash
-krypt target info https://authorized.example
-```
-
-Remove:
-
-```bash
-krypt target remove https://authorized.example
-```
-
----
-
-# 🧅 Optional SOCKS5 Support
-
-Enable:
-
-```bash
-krypt config set socks5.enabled true
-```
-
-Default:
-
-```text
-127.0.0.1:9050
-```
-
-KRYPT does not claim anonymity merely because SOCKS5/Tor is enabled.
-
----
-
-# 📄 Reporting Engine
-
-Generate terminal report:
-
-```bash
-krypt report --format terminal
-```
-
-JSON:
-
-```bash
-krypt report --format json
-```
-
-HTML:
-
-```bash
-krypt report --format html
-```
-
-PDF:
-
-```bash
-krypt report --format pdf
-```
-
-Reports include:
-
-```text
-Executive Summary
-Scope
-Methodology
-Findings
-Severity
-Confidence
-Evidence
-Impact
-Remediation
-Technical Details
-Timestamp
-```
-
----
-
-# 🌳 Terminal Intelligence Graph
-
-```bash
-krypt graph example.com
-```
-
-Example:
-
-```text
-example.com
-├── www.example.com
-│   ├── /login
-│   ├── /api
-│   └── /assets
-│
-├── api.example.com
-│   ├── /v1
-│   └── /v2
-│
-└── dev.example.com
-    └── /test
-```
-
-KRYPT remains completely terminal-based.
-
----
-
-# 🔌 Plugin Architecture
-
-```bash
-krypt plugins list
-```
-
-Inspect:
-
-```bash
-krypt plugins info <module>
-```
-
-Plugin categories:
-
-```text
-OSINT
-├── DNS
-├── Subdomains
-├── Emails
-└── Certificates
-
-WEB
-├── Crawler
-├── Endpoints
-├── Headers
-└── Technology
-
-SECURITY
-├── SQLi
-├── XSS
-├── Auth
-├── AuthZ
-└── IDOR
-```
-
----
-
-# ⚙️ Configuration
-
-Configuration:
-
-```text
-~/.krypt/config.yaml
-```
-
-Example:
-
-```yaml
-request:
-  timeout: 10
-  rate_limit: 5
-  user_agent: "KRYPT-CLI/0.1"
-
-crawler:
-  max_depth: 3
-  max_pages: 500
-  threads: 5
-
-socks5:
-  enabled: false
-  host: 127.0.0.1
-  port: 9050
-
-safety:
-  require_registered_target: true
-  lab_mode: false
-```
-
----
-
-# 🚀 Quickstart
-
-## Requirements
-
-```text
-Python 3.11+
-SQLite
-Docker
-Git
-```
 
 ## Installation
+
+### Automatic Installation (macOS & Linux)
 
 ```bash
 git clone https://github.com/manoharmanyu/krypt-cli.git
 cd krypt-cli
+chmod +x install.sh
+./install.sh
+```
 
+### Manual Installation
+
+```bash
+# 1. Create and activate virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
 
-python -m pip install --upgrade pip
+# 2. Upgrade pip and install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 3. Install krypt-cli in editable mode
 pip install -e .
-```
 
-Run:
-
-```bash
+# 4. Verify system diagnostics
 krypt doctor
 ```
 
 ---
 
-# ⚡ First Run
+## Quick Start Guide
 
+### 1. Run Diagnostics
 ```bash
-krypt --version
+krypt doctor
 ```
 
-```bash
-krypt --help
-```
-
-Start laboratory:
-
+### 2. Start the Local Vulnerable Laboratory
 ```bash
 krypt lab start
-```
-
-Verify:
-
-```bash
 krypt lab verify
 ```
 
-Register local target:
-
+### 3. Register Authorized Target
 ```bash
-krypt target add http://127.0.0.1:8888
+krypt target add http://127.0.0.1:8888 --notes "Local Training Lab"
+krypt target list
 ```
 
-Recon:
+### 4. Gather OSINT & Domain Intelligence
+```bash
+krypt osint localhost
+krypt dns localhost
+```
 
+### 5. Reconnaissance & Technology Fingerprinting
 ```bash
 krypt recon http://127.0.0.1:8888
+krypt tech http://127.0.0.1:8888
+krypt headers http://127.0.0.1:8888
 ```
 
-Crawl:
-
+### 6. Crawl & Discover Endpoints
 ```bash
-krypt crawl http://127.0.0.1:8888
+krypt crawl http://127.0.0.1:8888 --depth 3 --max-pages 50
+krypt endpoints http://127.0.0.1:8888
+krypt scripts http://127.0.0.1:8888
 ```
 
-Scan:
-
+### 7. Run Security Assessment
 ```bash
+# Run all security assessment modules
 krypt scan http://127.0.0.1:8888 --all
+
+# Or run specific modules
+krypt scan http://127.0.0.1:8888 --module sqli
+krypt scan http://127.0.0.1:8888 --module xss
+krypt scan http://127.0.0.1:8888 --module authz
 ```
 
-Findings:
-
+### 8. Inspect Findings & Verifiable Evidence
 ```bash
 krypt findings
+krypt findings show <FINDING_ID>
+krypt evidence <FINDING_ID>
 ```
 
-Report:
-
+### 9. Terminal Visualization
 ```bash
-krypt report --format html
+krypt graph http://127.0.0.1:8888
 ```
 
-Stop laboratory:
+### 10. Generate Assessment Reports
+```bash
+krypt report --format terminal
+krypt report --format json --output report.json
+krypt report --format html --output report.html
+krypt report --format pdf --output report.pdf
+```
 
+### 11. Stop the Laboratory
 ```bash
 krypt lab stop
 ```
 
 ---
 
-# 🧪 Testing
+## CLI Command Reference
 
-Run:
-
-```bash
-pytest -v
-```
-
-Current verification:
-
-```text
-37 tests
-37 passed
-100% pass rate
-```
-
-Test coverage includes:
-
-```text
-CLI
-Crawler
-DNS
-Evidence Redaction
-Hardened Application
-Integrity
-Security Modules
-Reporting
-Scope
-SEO
-Technology Detection
-```
-
-Example:
-
-```text
-============================= 37 passed =============================
-```
+| Command | Arguments / Options | Description |
+| :--- | :--- | :--- |
+| `krypt target add` | `<target> [--notes text]` | Register and authorize a target in scope. |
+| `krypt target list` | | List all authorized targets in the database. |
+| `krypt target remove` | `<target>` | Deauthorize and remove a target from scope. |
+| `krypt target info` | `<target>` | Display detailed profile and history for target. |
+| `krypt osint` | `<domain> [--json] [-o path]` | Aggregate all modular OSINT sources. |
+| `krypt dns` | `<domain>` | Enumerate DNS records (A, AAAA, MX, NS, TXT, SOA). |
+| `krypt subdomains` | `<domain>` | Discover subdomains & resolve IP addresses. |
+| `krypt emails` | `<domain>` | Harvest public email indicators. |
+| `krypt recon` | `<target>` | Full web recon (TLS, redirects, robots, sitemaps). |
+| `krypt tech` | `<target>` | Fingerprint servers, frameworks, and CMS. |
+| `krypt headers` | `<target>` | Audit security headers & cookie security flags. |
+| `krypt seo` | `<target>` | Deep technical SEO audit & search rank diagnostics. |
+| `krypt crawl` | `<target> [--depth] [--max-pages]` | Async BFS web crawler and link extractor. |
+| `krypt endpoints` | `<target>` | View normalized discovered endpoint inventory. |
+| `krypt scripts` | `<target>` | Inspect JavaScript files for API routes & params. |
+| `krypt scan` | `<target> [--all] [--module name]` | Execute defensive security assessment modules. |
+| `krypt findings` | `[show id] [--severity] [--target]` | Query recorded vulnerability findings. |
+| `krypt evidence` | `<finding-id>` | Inspect redacted HTTP transaction proof. |
+| `krypt graph` | `<target>` | Render terminal tree graph of attack surface. |
+| `krypt report` | `[--format f] [--output o]` | Export reports (terminal, json, html, pdf, md, csv). |
+| `krypt lab` | `<start|stop|status|verify> [--mode]` | Manage training laboratory (vulnerable or hardened). |
+| `krypt plugins` | `<list|info name>` | List and inspect extensible plugin capabilities. |
+| `krypt config` | `[get key] [set key val]` | View or update `~/.krypt/config.yaml`. |
+| `krypt doctor` | | Run system health and environment diagnostics. |
+| `krypt integrity` | `[--generate] [--json]` | Verify SHA-256 code integrity (crackproof & anti-tamper). |
 
 ---
 
-# 🏗️ System Architecture
+## Target Authorization & Safety Model
 
-```text
-                         ┌─────────────────┐
-                         │    KRYPT CLI    │
-                         └────────┬────────┘
-                                  │
-             ┌────────────────────┼────────────────────┐
-             │                    │                    │
-             ▼                    ▼                    ▼
-        ┌─────────┐         ┌─────────┐         ┌──────────┐
-        │  OSINT  │         │  RECON  │         │ SECURITY │
-        └────┬────┘         └────┬────┘         └────┬─────┘
-             │                   │                   │
-             ▼                   ▼                   ▼
-        DNS / Email         Crawler / Tech       SQLi / XSS
-        Subdomains          Endpoints / Headers  Auth / IDOR
-             │                   │                   │
-             └───────────────────┼───────────────────┘
-                                 ▼
-                        ┌─────────────────┐
-                        │  SCOPE ENGINE   │
-                        └────────┬────────┘
-                                 │
-                                 ▼
-                        ┌─────────────────┐
-                        │ EVIDENCE STORE  │
-                        └────────┬────────┘
-                                 │
-                                 ▼
-                        ┌─────────────────┐
-                        │  FINDINGS DB    │
-                        └────────┬────────┘
-                                 │
-                                 ▼
-                        ┌─────────────────┐
-                        │ REPORT ENGINE   │
-                        └───────┬─────────┘
-                                │
-                    ┌───────────┼───────────┐
-                    ▼           ▼           ▼
-                   JSON        HTML         PDF
+KRYPT is strictly designed for:
+* Systems you own
+* Systems for which you have explicit written authorization
+* Localhost test environments (`127.0.0.1`)
+* Intentionally vulnerable training laboratories
+
+### Fail-Closed Execution Pipeline
 ```
+Target Registered?  ──►  Hostname Allowed?  ──►  Resolved IP Allowed?  ──►  EXECUTE
+       │                        │                         │
+       ▼ (NO)                   ▼ (NO)                    ▼ (NO)
+   [BLOCKED]                [BLOCKED]                 [BLOCKED]
+```
+
+Unregistered external targets are blocked by default with `ScopeViolationException`.
 
 ---
 
-# 📁 Project Structure
+## References & Attributions
 
-```text
-krypt-cli/
-│
-├── krypt/
-│   ├── __init__.py
-│   ├── __main__.py
-│   │
-│   ├── cli/
-│   ├── core/
-│   ├── safety/
-│   ├── osint/
-│   ├── recon/
-│   ├── crawler/
-│   ├── modules/
-│   ├── database/
-│   ├── evidence/
-│   ├── reporting/
-│   ├── plugins/
-│   └── utils/
-│
-├── lab/
-├── tests/
-├── docs/
-├── scripts/
-├── reports/
-│
-├── AUTHORS.md
-├── REFERENCES.md
-├── LICENSE
-├── README.md
-├── pyproject.toml
-├── requirements.txt
-└── Makefile
-```
+KRYPT CLI draws architectural inspiration from prominent open-source security projects:
+* **ARES** ([https://github.com/Mafifrizi/ARES](https://github.com/Mafifrizi/ARES)): Fail-closed scope model, modular findings.
+* **theHarvester** ([https://github.com/laramies/theHarvester](https://github.com/laramies/theHarvester)): Multi-source OSINT aggregation.
+* **Photon** ([https://github.com/s0md3v/Photon](https://github.com/s0md3v/Photon)): Fast BFS crawling, JS static inspection.
+* **TorBot** ([https://github.com/DedSecInside/TorBot](https://github.com/DedSecInside/TorBot)): CLI-first architecture, optional SOCKS5 routing.
 
----
-KRYPT CLI is not affiliated with these projects.
-
-Detailed attribution is available in:
-
-```text
-REFERENCES.md
-```
+See `REFERENCES.md` for full attribution details.
 
 ---
 
-# 🧩 Technology Stack
+## Legal & Responsible Use
 
-```text
-Python 3.11+
-Typer
-Rich
-httpx
-dnspython
-BeautifulSoup4
-SQLAlchemy
-Pydantic
-PyYAML
-SQLite
-Docker
-```
-
----
-
-# 🛡️ Responsible Use & Legal Notice
-
-KRYPT CLI is intended for:
-
-* Authorized penetration testing
-* Security research
-* Defensive security validation
-* Local security laboratories
-* Systems owned or explicitly authorized for testing
-
-Do not run active security testing against systems without authorization.
-
-The user is responsible for complying with applicable laws, regulations, policies, and authorization requirements.
-
----
-
-# 👨‍💻 Author
-
-## Gaddam Manyu
-
-**Creator & Developer**
-
-GitHub:
-
-**[@manoharmanyu](https://github.com/manoharmanyu)**
-
-Project:
-
-**KRYPT CLI**
-
-Tagline:
-
-> **OSINT • RECON • DISCOVER • ASSESS**
-
----
-
-# 📜 License
-
-KRYPT CLI is distributed under the license included in:
-
-```text
-LICENSE
-```
-
----
-
-# ⭐ KRYPT CLI
-
-```text
-██╗  ██╗██████╗ ██╗   ██╗██████╗ ████████╗
-██║ ██╔╝██╔══██╗╚██╗ ██╔╝██╔══██╗╚══██╔══╝
-█████╔╝ ██████╔╝ ╚████╔╝ ██████╔╝   ██║
-██╔═██╗ ██╔══██╗  ╚██╔╝  ██╔═══╝    ██║
-██║  ██╗██║  ██║   ██║   ██║        ██║
-╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝        ╚═╝
-
-          OSINT • RECON • DISCOVER • ASSESS
-
-             Created by Gaddam Manyu
-                  @manoharmanyu
-```
-
-**Terminal-native. Evidence-driven. Scope-controlled.**
-
-```bash
-krypt --help
-```
+KRYPT CLI is an educational and authorized security assessment framework. It is intended solely for security professionals, researchers, developers, and educators assessing systems they have explicit permission to test. Unauthorized scanning or testing of third-party systems is illegal. The author assumes no liability for misuse of this tool.

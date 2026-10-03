@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "krypt-cli"
+version = "0.1.0"
+description = "KRYPT CLI: 100% Terminal-Driven Cybersecurity Intelligence and Authorized Web-Security Assessment Framework"
+readme = "README.md"
+authors = [
+    { name = "Gaddam Manyu", email = "manoharmanyu@users.noreply.github.com" }
+]
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "httpx>=0.25.0",
+    "dnspython>=2.4.0",
+    "beautifulsoup4>=4.12.0",
+    "pydantic>=2.0.0",
+    "pyyaml>=6.0",
+    "sqlalchemy>=2.0.0",
+    "jinja2>=3.1.0",
+    "starlette>=0.30.0",
+    "uvicorn>=0.23.0",
+]
+
+[project.scripts]
+krypt = "krypt.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["krypt*", "lab*"]
+exclude = ["tests*", "reports*", "docs*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --asyncio-mode=auto"
+testpaths = [
+    "tests",
+]
+asyncio_mode = "auto"

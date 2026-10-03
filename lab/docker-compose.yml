@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  krypt-lab:
+    build:
+      context: ..
+      dockerfile: lab/Dockerfile
+    container_name: krypt-lab
+    ports:
+      - "127.0.0.1:8888:8888"
+    environment:
+      - PORT=8888
+      - HOST=0.0.0.0
+    restart: unless-stopped

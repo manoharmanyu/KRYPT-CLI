@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Local KRYPT state & databases
+.krypt/
+reports/*.html
+reports/*.pdf
+reports/*.json
+reports/*.csv
+reports/*.md
+
+# System & OS files
+.DS_Store
+*.log
