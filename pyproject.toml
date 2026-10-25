@@ -28,6 +28,7 @@ dependencies = [
 
 [project.scripts]
 krypt = "krypt.__main__:main"
+krypto = "krypt.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

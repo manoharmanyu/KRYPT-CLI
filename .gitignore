@@ -8,6 +8,8 @@ __pycache__/
 venv/
 ENV/
 env/
+integrations/venvs/
+integrations/vendor/
 
 # Testing & Coverage
 .pytest_cache/

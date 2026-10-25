@@ -238,6 +238,33 @@ krypt lab stop
 | `krypt config` | `[get key] [set key val]` | View or update `~/.krypt/config.yaml`. |
 | `krypt doctor` | | Run system health and environment diagnostics. |
 | `krypt integrity` | `[--generate] [--json]` | Verify SHA-256 code integrity (crackproof & anti-tamper). |
+| `krypt tools list` | `[--json]` | Catalog all integrated upstream tools, licenses, and SHAs. |
+| `krypt tools doctor` | `[--json]` | Diagnose health of all 4 tool isolated virtual environments. |
+| `krypt tools harvester` | `<domain> [--sources] [--limit] [-a]` | Run theHarvester OSINT reconnaissance suite. |
+| `krypt tools photon` | `<target> [--level] [--threads]` | Run Photon deep crawler, endpoint, and secret discoverer. |
+| `krypt tools torbot` | `<target> [--depth] [--dry-run]` | Run TorBot darknet (.onion) crawler and link mapper. |
+| `krypt tools ares` | `[target] [--action doctor\|modules]` | Run ARES safe capability and prerequisite audit. |
+| `krypt torbot` | `<target> [options]` | Top-level alias for TorBot darknet OSINT inspection. |
+| `krypt redteam` | `[target] [options]` | Top-level alias for ARES safe capability and scope audit. |
+
+---
+
+## Upstream Tool Integrations
+
+KRYPT CLI embeds a modular adapter layer connecting four renowned open-source cybersecurity frameworks:
+
+* **theHarvester** (`laramies/theHarvester`, GPL-2.0-only, commit `6790b147f5`) — Python 3.14 venv
+* **Photon** (`s0md3v/Photon`, GPL-3.0, commit `c8d2566841`) — Python 3.11 venv
+* **TorBot** (`DedSecInside/TorBot`, GPL-3.0, commit `1cc500ff2b`) — Python 3.12 venv
+* **ARES** (`Mafifrizi/ARES`, MIT, commit `3e1a9dd513`) — Python 3.11 venv
+
+All tools run in completely isolated virtual environments in `integrations/venvs/`, ensuring zero dependency conflicts with the host system. For deep technical details, repository inventory, and safety controls, see [docs/INTEGRATIONS.md](docs/INTEGRATIONS.md).
+
+Both `krypt` and `krypto` CLI entrypoints are supported:
+```bash
+krypto tools list
+krypto tools doctor
+```
 
 ---
 

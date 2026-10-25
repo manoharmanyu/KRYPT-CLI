@@ -45,6 +45,9 @@ app = typer.Typer(
 
 app.add_typer(target_app, name="target")
 
+from krypt.cli.tools import tools_app, torbot_command, ares_command
+app.add_typer(tools_app, name="tools")
+
 console = Console()
 
 
@@ -830,6 +833,50 @@ def verify_integrity_alias(
 ):
     """Alias for krypt integrity."""
     integrity_command(generate=generate, json_output=json_output)
+
+
+@app.command("torbot")
+def torbot_alias(
+    target: str = typer.Argument(..., help="Target .onion URL or service to inspect."),
+    depth: int = typer.Option(1, "--depth", "-d", help="Crawl depth (1-3)."),
+    proxy_host: str = typer.Option("127.0.0.1", "--proxy-host", help="Tor SOCKS5 proxy IP."),
+    proxy_port: int = typer.Option(9050, "--proxy-port", help="Tor SOCKS5 proxy port (default 9050 or 9150)."),
+    disable_socks5: bool = typer.Option(False, "--disable-socks5", help="Bypass Tor proxy (for clearnet targets only)."),
+    dry_run: bool = typer.Option(False, "--dry-run", help="Simulate execution without sending live network traffic."),
+    timeout: int = typer.Option(60, "--timeout", help="Execution timeout in seconds."),
+    json_output: bool = typer.Option(False, "--json", help="Output results in JSON format."),
+    output: Optional[str] = typer.Option(None, "--output", "-o", help="File to write result JSON.")
+):
+    """Execute TorBot dark web OSINT crawler against .onion targets."""
+    torbot_command(
+        target=target,
+        depth=depth,
+        proxy_host=proxy_host,
+        proxy_port=proxy_port,
+        disable_socks5=disable_socks5,
+        dry_run=dry_run,
+        timeout=timeout,
+        json_output=json_output,
+        output=output
+    )
+
+
+@app.command("redteam")
+def redteam_alias(
+    target: str = typer.Argument("local_audit", help="Target or engagement scope identifier."),
+    action: str = typer.Option("doctor", "--action", "-a", help="Safe audit action: doctor, modules, info, targets, campaigns."),
+    module: Optional[str] = typer.Option(None, "--module", "-m", help="Specific module to inspect."),
+    json_output: bool = typer.Option(False, "--json", help="Output results in JSON format."),
+    output: Optional[str] = typer.Option(None, "--output", "-o", help="File to write result JSON.")
+):
+    """Safe audit & capability inspection via ARES Automated Red Team Engagement System."""
+    ares_command(
+        target=target,
+        action=action,
+        module=module,
+        json_output=json_output,
+        output=output
+    )
 
 
 def main():
